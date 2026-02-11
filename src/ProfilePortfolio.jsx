@@ -1,9 +1,15 @@
 // ProfilePortfolio.jsx - Ultra-modern developer portfolio with tech logos and stunning design
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Spotlight } from './components/ui/spotlight';
+import { FlipWords } from './components/ui/flip-words';
+import { TextGenerateEffect } from './components/ui/text-generate-effect';
+import { Meteors } from './components/ui/meteors';
+import { CardSpotlight } from './components/ui/card-spotlight';
+import { EncryptedText } from './components/ui/encrypted-text';
 
 const styles = `
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
 
 * {
   box-sizing: border-box;
@@ -12,7 +18,7 @@ const styles = `
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   background: #0a0a0a;
 }
 
@@ -575,12 +581,293 @@ body {
 }
 
 @media (max-width: 480px) {
-  .hero-name {
-    font-size: 2.5rem;
+  .hero-name-new {
+    font-size: 2.2rem !important;
+  }
+
+  .hero-role-line {
+    font-size: 1rem !important;
   }
 
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ===== NEW HERO STYLES ===== */
+
+@keyframes spotlightFade {
+  0% { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@keyframes meteorFall {
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(-600px); opacity: 0; }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(6px) rotate(-1deg); }
+}
+
+@keyframes floatIcon2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-2deg); }
+}
+
+.hero-section-new {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgba(255,255,255,0.035)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+}
+
+.hero-grid-mask {
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, black);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, black);
+}
+
+.hero-content-new {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-avatar-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-avatar-glow {
+  position: absolute;
+  inset: -1.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 70%);
+  filter: blur(25px);
+  animation: pulseGlow 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero-avatar-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1);
+  animation: spinSlow 4s linear infinite;
+  z-index: 1;
+}
+
+.hero-avatar-ring::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #0a0a0a;
+}
+
+.hero-avatar-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.hero-avatar-text {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  user-select: none;
+}
+
+.hero-name-new {
+  font-size: 4.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, rgba(255,255,255,0.4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-role-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  min-height: 3rem;
+  position: relative;
+}
+
+.hero-role-prefix {
+  color: #6b6b80;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.hero-bio-wrapper {
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.hero-shimmer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #d4d4e0;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(110deg, #0a0a0a 0%, #0a0a0a 40%, #1a1a3e 50%, #0a0a0a 60%, #0a0a0a 100%);
+  background-size: 250% 100%;
+  animation: shimmer 3s linear infinite;
+  transition: all 0.3s ease;
+}
+
+.hero-shimmer-btn:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.25);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.hero-shimmer-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.hero-shimmer-btn:hover svg {
+  transform: translateY(2px);
+}
+
+.hero-secondary-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.hero-secondary-links a,
+.hero-secondary-links span {
+  font-size: 0.85rem;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.hero-secondary-links a:hover {
+  color: #a5b4fc;
+}
+
+.hero-secondary-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.hero-floating-icon {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  pointer-events: none;
+  animation: floatIcon 7s ease-in-out infinite;
+}
+
+.hero-floating-icon:nth-child(even) {
+  animation: floatIcon2 8s ease-in-out infinite;
+}
+
+.hero-scroll-new {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-scroll-new span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .hero-name-new {
+    font-size: 3rem;
+  }
+  .hero-role-line {
+    font-size: 1.1rem;
+  }
+  .hero-avatar-ring {
+    width: 130px;
+    height: 130px;
+  }
+  .hero-avatar-text {
+    font-size: 2.8rem;
+  }
+  .hero-floating-icon {
+    width: 32px;
+    height: 32px;
   }
 }
 `;
@@ -785,77 +1072,157 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
 
   return (
     <div className="portfolio-wrapper">
-      <section className="hero-section">
-        <div className="hero-gradient"></div>
-        <div className="hero-gradient-2"></div>
+      {/* ====== HERO SECTION ====== */}
+      <section className="hero-section-new">
+        {/* Grid background */}
+        <div className="hero-grid-bg" />
+        {/* Radial fade mask */}
+        <div className="hero-grid-mask" />
 
-        <motion.div
-          className="hero-content"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        {/* Meteors */}
+        <Meteors number={12} />
+
+        {/* Spotlights */}
+        <Spotlight fill="#6366f1" style={{ top: '-40%', left: '0' }} />
+        <Spotlight fill="#a855f7" style={{ top: '-30%', right: '0', left: 'auto' }} />
+
+        {/* Floating tech icons */}
+        {[
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg', top: '12%', left: '8%', delay: 0 },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/angular/angular-original.svg', top: '18%', right: '10%', delay: 1.2 },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg', bottom: '22%', left: '12%', delay: 2.5 },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg', bottom: '18%', right: '8%', delay: 0.6 },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg', top: '50%', left: '5%', delay: 1.8 },
+          { icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg', top: '42%', right: '6%', delay: 0.9 },
+        ].map((item, i) => (
+          <motion.img
+            key={i}
+            src={item.icon}
+            alt=""
+            className="hero-floating-icon"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.08 }}
+            transition={{ delay: 1.5 + item.delay, duration: 2 }}
+            style={{
+              top: item.top,
+              left: item.left,
+              right: item.right,
+              bottom: item.bottom,
+              animationDelay: `${item.delay}s`,
+            }}
+          />
+        ))}
+
+        {/* Hero Content */}
+        <div className="hero-content-new">
+
+          {/* Avatar with spinning gradient border */}
           <motion.div
-            className="hero-avatar"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+            className="hero-avatar-wrapper"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 150, damping: 15 }}
           >
-            <span className="hero-initials">AB</span>
+            <div className="hero-avatar-glow" />
+            <div className="hero-avatar-ring" />
+            <div className="hero-avatar-inner">
+              <span className="hero-avatar-text">AB</span>
+            </div>
           </motion.div>
 
+          {/* Name */}
           <motion.h1
-            className="hero-name"
-            initial={{ opacity: 0, y: 20 }}
+            className="hero-name-new"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
           >
-            BELAIFA Amir
+            <EncryptedText text="BELAIFA Amir" animateOn="mount" maxDuration={1200} />
           </motion.h1>
 
-          <motion.p
-            className="hero-title"
+          {/* FlipWords role line */}
+          <motion.div
+            className="hero-role-line"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.6 }}
           >
-            Ingénieur Logiciel Full-Stack
-          </motion.p>
+            <span className="hero-role-prefix">I am a</span>
+            <FlipWords
+              words={[
+                "Full-Stack Developer",
+                "Software Engineer",
+                "FinTech Specialist",
+                "Problem Solver",
+              ]}
+              duration={3000}
+              style={{
+                color: '#a78bfa',
+                fontWeight: 700,
+              }}
+            />
+          </motion.div>
 
-          <motion.p
-            className="hero-bio"
+          {/* Bio with text generate effect */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.8 }}
           >
-            Passionné par la création d'applications web modernes et performantes.
-            Plus d'un an d'expérience dans le développement frontend et backend,
-            avec une expertise en Angular, React, Spring Boot et bien plus encore.
-          </motion.p>
+            <TextGenerateEffect
+              words="Passionné par la création d'applications web modernes et performantes. Plus d'un an d'expérience dans le développement frontend et backend, avec une expertise en Angular, React, Spring Boot et bien plus encore."
+              style={{ maxWidth: '650px', margin: '0 auto 2.5rem', fontSize: '1.1rem', lineHeight: 1.8 }}
+              duration={0.4}
+            />
+          </motion.div>
 
+          {/* CTA Button with shimmer */}
           <motion.a
-            href="https://MiroMIH.github.io/portfolio/CV_Amir_Belaifa.pdf" // 1. Path to file in public folder
-            download="CV_Amir_Belaifa.pdf" // 2. Forces the browser to download instead of open
-            className="hero-cta"
+            href="https://MiroMIH.github.io/portfolio/CV_Amir_Belaifa.pdf"
+            download="CV_Amir_Belaifa.pdf"
+            className="hero-shimmer-btn"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 1.0 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <svg className="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: '20px', height: '20px' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
             </svg>
-            Télécharger mon CV
+            <EncryptedText text="Télécharger mon CV" animateOn="mount" maxDuration={800} />
           </motion.a>
-        </motion.div>
 
-        <div className="scroll-indicator">
-          <span>Scroll</span>
-          <svg className="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M19 12l-7 7-7-7" />
-          </svg>
+          {/* Secondary links */}
+          <motion.div
+            className="hero-secondary-links"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+          >
+            <a href="mailto:amirbelaifa2001@gmail.com"><EncryptedText text="amirbelaifa2001@gmail.com" animateOn="mount" maxDuration={1000} /></a>
+            <div className="hero-secondary-dot" />
+            <span><EncryptedText text="Boudouaou, Boumerdès" animateOn="mount" maxDuration={800} /></span>
+          </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="hero-scroll-new"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <span>Scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <svg style={{ width: 20, height: 20, color: '#444' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 5v14M19 12l-7 7-7-7" />
+            </svg>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section className="skills-section">
@@ -867,44 +1234,44 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              Compétences & Technologies
+              <EncryptedText text="Compétences & Technologies" />
             </motion.h2>
             <motion.p className="section-subtitle" variants={itemVariants}>
-              Maîtrise des technologies modernes pour créer des expériences exceptionnelles
+              <EncryptedText text="Maîtrise des technologies modernes pour créer des expériences exceptionnelles" maxDuration={2000} />
             </motion.p>
 
             <div className="skills-grid">
               <motion.div className="skill-category" variants={itemVariants}>
-                <h3 className="skill-category-title">Frontend</h3>
+                <h3 className="skill-category-title"><EncryptedText text="Frontend" /></h3>
                 <div className="tech-logos">
                   {['Angular', 'React', 'NextJS', 'JavaScript', 'HTML', 'CSS', 'TailwindCSS', 'Flutter', 'TypeScript'].map(tech => (
                     <div key={tech} className="tech-logo-item">
                       <img src={techLogos[tech]} alt={tech} className="tech-logo" />
-                      <span className="tech-name">{tech}</span>
+                      <span className="tech-name"><EncryptedText text={tech} maxDuration={600} /></span>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div className="skill-category" variants={itemVariants}>
-                <h3 className="skill-category-title">Backend</h3>
+                <h3 className="skill-category-title"><EncryptedText text="Backend" /></h3>
                 <div className="tech-logos">
                   {['Spring Boot', 'Django', 'Java', 'NodeJS', 'PHP', 'Python'].map(tech => (
                     <div key={tech} className="tech-logo-item">
                       <img src={techLogos[tech]} alt={tech} className="tech-logo" />
-                      <span className="tech-name">{tech}</span>
+                      <span className="tech-name"><EncryptedText text={tech} maxDuration={600} /></span>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div className="skill-category" variants={itemVariants}>
-                <h3 className="skill-category-title">Bases de données</h3>
+                <h3 className="skill-category-title"><EncryptedText text="Bases de données" /></h3>
                 <div className="tech-logos">
                   {['MongoDB', 'MySQL', 'PostgreSQL'].map(tech => (
                     <div key={tech} className="tech-logo-item">
                       <img src={techLogos[tech]} alt={tech} className="tech-logo" />
-                      <span className="tech-name">{tech}</span>
+                      <span className="tech-name"><EncryptedText text={tech} maxDuration={600} /></span>
                     </div>
                   ))}
                 </div>
@@ -923,10 +1290,10 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              Projets & Réalisations
+              <EncryptedText text="Projets & Réalisations" />
             </motion.h2>
             <motion.p className="section-subtitle" variants={itemVariants}>
-              Découvrez mes derniers projets et créations
+              <EncryptedText text="Découvrez mes derniers projets et créations" maxDuration={1800} />
             </motion.p>
             {/* 
                         <motion.div className="filter-bar" variants={itemVariants}>
@@ -943,12 +1310,16 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
 
             <div className="projects-grid">
               {filteredProjects.map((project) => (
-                <motion.article
+                <CardSpotlight
                   key={project.id}
                   className="project-card"
-                  variants={itemVariants}
-                  whileHover={{ y: -10 }}
+                  style={{ cursor: 'pointer' }}
                 >
+                  <motion.div
+                    variants={itemVariants}
+                    whileHover={{ y: -10 }}
+                    style={{ height: '100%' }}
+                  >
                   <div className="project-image-wrapper">
                     <img
                       src={project.img}
@@ -965,8 +1336,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                   </div>
 
                   <div className="project-content">
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-desc">{project.desc}</p>
+                    <h3 className="project-title"><EncryptedText text={project.title} /></h3>
+                    <p className="project-desc"><EncryptedText text={project.desc} maxDuration={2500} encryptedStyle={{ color: '#4a4a60' }} /></p>
 
                     {project.progress !== undefined && (
                       <div className="progress-bar-container">
@@ -999,7 +1370,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                                             </svg>
                                         </a> */}
                   </div>
-                </motion.article>
+                  </motion.div>
+                </CardSpotlight>
               ))}
             </div>
           </motion.div>
@@ -1015,21 +1387,21 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              Expérience Professionnelle
+              <EncryptedText text="Expérience Professionnelle" />
             </motion.h2>
             <motion.p className="section-subtitle" variants={itemVariants}>
-              Mon parcours dans le développement logiciel
+              <EncryptedText text="Mon parcours dans le développement logiciel" maxDuration={1800} />
             </motion.p>
 
             <motion.div className="experience-card" variants={itemVariants}>
               <div className="experience-header">
-                <h3 className="experience-company">BEYN (ex : AeBS)</h3>
-                <span className="experience-period">Mai 2024 - Présent</span>
+                <h3 className="experience-company"><EncryptedText text="BEYN (ex : AeBS)" /></h3>
+                <span className="experience-period"><EncryptedText text="Mai 2024 - Présent" /></span>
               </div>
-              <p className="experience-role">Full-stack Developer</p>
+              <p className="experience-role"><EncryptedText text="Full-stack Developer" /></p>
               <div className="experience-desc text-gray-700 leading-relaxed">
-                <p className="mb-6">
-                  Développement de solutions numériques pour la transformation digitale des institutions financières :
+                <p style={{ marginBottom: '1.5rem' }}>
+                  <EncryptedText text="Développement de solutions numériques pour la transformation digitale des institutions financières :" maxDuration={2000} />
                 </p>
                 <ul className="list-disc list-inside space-y-4">
                   <li>Participation active à la conception, au développement et à l’optimisation d’applications web modernes pour les services bancaires numériques.</li>
@@ -1060,10 +1432,10 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              Restons en Contact
+              <EncryptedText text="Restons en Contact" />
             </motion.h2>
             <motion.p className="section-subtitle" variants={itemVariants}>
-              N'hésitez pas à me contacter pour vos projets
+              <EncryptedText text="N'hésitez pas à me contacter pour vos projets" maxDuration={1800} />
             </motion.p>
 
             <div className="contact-grid">
@@ -1073,8 +1445,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <p className="contact-label">Email</p>
-                <p className="contact-value">amirbelaifa2001@gmail.com</p>
+                <p className="contact-label"><EncryptedText text="Email" /></p>
+                <p className="contact-value"><EncryptedText text="amirbelaifa2001@gmail.com" /></p>
               </motion.div>
 
               <motion.div className="contact-card" variants={itemVariants}>
@@ -1083,8 +1455,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
-                <p className="contact-label">Téléphone</p>
-                <p className="contact-value">0792 76 70 87</p>
+                <p className="contact-label"><EncryptedText text="Téléphone" /></p>
+                <p className="contact-value"><EncryptedText text="0792 76 70 87" /></p>
               </motion.div>
 
               <motion.div className="contact-card" variants={itemVariants}>
@@ -1094,15 +1466,15 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <p className="contact-label">Localisation</p>
-                <p className="contact-value">Boudouaou, Boumerdès</p>
+                <p className="contact-label"><EncryptedText text="Localisation" /></p>
+                <p className="contact-value"><EncryptedText text="Boudouaou, Boumerdès" /></p>
               </motion.div>
             </div>
           </motion.div>
         </div>
 
         <div className="footer">
-          <p>© 2024 BELAIFA Amir. Tous droits réservés.</p>
+          <p><EncryptedText text="© 2024 BELAIFA Amir. Tous droits réservés." /></p>
         </div>
       </section>
     </div>
