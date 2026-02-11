@@ -595,18 +595,19 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
   // Helper function to provide a better default image if a custom one isn't provided
   const getBankingImage = (id) => {
     const images = {
-      'SGA POS': '/SGA-LOGO.jpg',  // SGA image
-      'SGA SELA': '/SGA-LOGO.jpg', // You can keep same or change if you have another
-      'AGB': '/AGB-LOGO.jpg',      // AGB image
-      'BEAI': '/BEA-LOGO.jpg',     // BEAI image
-      'eGov-NLP': 'https://images.unsplash.com/photo-1531746790731-6e3e55c570f7?w=800&h=600&fit=crop', // AI/NLP image
-      'eGov-Mobile': 'https://images.unsplash.com/photo-1588702331599-ced7b134d173?w=800&h=600&fit=crop', // Mobile app image
-      'RecSys': 'https://images.unsplash.com/photo-1522036495349-43c3f918e7e1?w=800&h=600&fit=crop', // Movie/RecSys image
-      'vsc': '/VSC-LOGO.jpg',
-      'sv': '/SV-EDU.jpg',
-      'egov': '/EGOVHUB-WEB.jpg',
+      'SGA POS': 'https://MiroMIH.github.io/portfolio/SGA-LOGO.jpg',
+      'SGA SELA': 'https://MiroMIH.github.io/portfolio/SGA-LOGO.jpg',
+      'AGB': 'https://MiroMIH.github.io/portfolio/AGB-LOGO.jpg',
+      'BEAI': 'https://MiroMIH.github.io/portfolio/BEA-LOGO.jpg',
+      'eGov-NLP': 'https://images.unsplash.com/photo-1531746790731-6e3e55c570f7?w=800&h=600&fit=crop',
+      'eGov-Mobile': 'https://images.unsplash.com/photo-1588702331599-ced7b134d173?w=800&h=600&fit=crop',
+      'RecSys': 'https://images.unsplash.com/photo-1522036495349-43c3f918e7e1?w=800&h=600&fit=crop',
+      'vsc': 'https://MiroMIH.github.io/portfolio/VSC-LOGO.jpg',
+      'sv': 'https://MiroMIH.github.io/portfolio/SV-EDU.jpg',
+      'egov': 'https://MiroMIH.github.io/portfolio/EGOVHUB-WEB.jpg',
       'default': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'
     };
+
     return images[id] || images['default'];
   };
 
@@ -833,7 +834,7 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
           </motion.p>
 
           <motion.a
-            href="/CV_Amir_Belaifa.pdf" // 1. Path to file in public folder
+            href="https://MiroMIH.github.io/portfolio/CV_Amir_Belaifa.pdf" // 1. Path to file in public folder
             download="CV_Amir_Belaifa.pdf" // 2. Forces the browser to download instead of open
             className="hero-cta"
             initial={{ opacity: 0, y: 20 }}
