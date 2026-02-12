@@ -1137,7 +1137,7 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            <EncryptedText text="BELAIFA Amir" animateOn="mount" maxDuration={1200} />
+            BELAIFA Amir
           </motion.h1>
 
           {/* FlipWords role line */}
@@ -1190,7 +1190,7 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
             </svg>
-            <EncryptedText text="Télécharger mon CV" animateOn="mount" maxDuration={800} />
+            Télécharger mon CV
           </motion.a>
 
           {/* Secondary links */}
@@ -1200,9 +1200,9 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
           >
-            <a href="mailto:amirbelaifa2001@gmail.com"><EncryptedText text="amirbelaifa2001@gmail.com" animateOn="mount" maxDuration={1000} /></a>
+            <a href="mailto:amirbelaifa2001@gmail.com">amirbelaifa2001@gmail.com</a>
             <div className="hero-secondary-dot" />
-            <span><EncryptedText text="Boudouaou, Boumerdès" animateOn="mount" maxDuration={800} /></span>
+            <span>Boudouaou, Boumerdès</span>
           </motion.div>
         </div>
 
@@ -1227,51 +1227,57 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
 
       <section className="skills-section">
         <div className="container">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            Compétences & Technologies
+          </motion.h2>
+          <p className="section-subtitle">
+            <EncryptedText text="Maîtrise des technologies modernes pour créer des expériences exceptionnelles" maxDuration={3500} />
+          </p>
+
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
           >
-            <motion.h2 className="section-title" variants={itemVariants}>
-              <EncryptedText text="Compétences & Technologies" />
-            </motion.h2>
-            <motion.p className="section-subtitle" variants={itemVariants}>
-              <EncryptedText text="Maîtrise des technologies modernes pour créer des expériences exceptionnelles" maxDuration={2000} />
-            </motion.p>
-
             <div className="skills-grid">
               <motion.div className="skill-category" variants={itemVariants}>
-                <h3 className="skill-category-title"><EncryptedText text="Frontend" /></h3>
+                <h3 className="skill-category-title">Frontend</h3>
                 <div className="tech-logos">
                   {['Angular', 'React', 'NextJS', 'JavaScript', 'HTML', 'CSS', 'TailwindCSS', 'Flutter', 'TypeScript'].map(tech => (
                     <div key={tech} className="tech-logo-item">
                       <img src={techLogos[tech]} alt={tech} className="tech-logo" />
-                      <span className="tech-name"><EncryptedText text={tech} maxDuration={600} /></span>
+                      <span className="tech-name">{tech}</span>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div className="skill-category" variants={itemVariants}>
-                <h3 className="skill-category-title"><EncryptedText text="Backend" /></h3>
+                <h3 className="skill-category-title">Backend</h3>
                 <div className="tech-logos">
                   {['Spring Boot', 'Django', 'Java', 'NodeJS', 'PHP', 'Python'].map(tech => (
                     <div key={tech} className="tech-logo-item">
                       <img src={techLogos[tech]} alt={tech} className="tech-logo" />
-                      <span className="tech-name"><EncryptedText text={tech} maxDuration={600} /></span>
+                      <span className="tech-name">{tech}</span>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div className="skill-category" variants={itemVariants}>
-                <h3 className="skill-category-title"><EncryptedText text="Bases de données" /></h3>
+                <h3 className="skill-category-title">Bases de données</h3>
                 <div className="tech-logos">
                   {['MongoDB', 'MySQL', 'PostgreSQL'].map(tech => (
                     <div key={tech} className="tech-logo-item">
                       <img src={techLogos[tech]} alt={tech} className="tech-logo" />
-                      <span className="tech-name"><EncryptedText text={tech} maxDuration={600} /></span>
+                      <span className="tech-name">{tech}</span>
                     </div>
                   ))}
                 </div>
@@ -1290,11 +1296,11 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              <EncryptedText text="Projets & Réalisations" />
+              Projets & Réalisations
             </motion.h2>
-            <motion.p className="section-subtitle" variants={itemVariants}>
+            <p className="section-subtitle">
               <EncryptedText text="Découvrez mes derniers projets et créations" maxDuration={1800} />
-            </motion.p>
+            </p>
             {/* 
                         <motion.div className="filter-bar" variants={itemVariants}>
                             {allTechs.map(tech => (
@@ -1336,8 +1342,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                   </div>
 
                   <div className="project-content">
-                    <h3 className="project-title"><EncryptedText text={project.title} /></h3>
-                    <p className="project-desc"><EncryptedText text={project.desc} maxDuration={2500} encryptedStyle={{ color: '#4a4a60' }} /></p>
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-desc">{project.desc}</p>
 
                     {project.progress !== undefined && (
                       <div className="progress-bar-container">
@@ -1387,21 +1393,21 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              <EncryptedText text="Expérience Professionnelle" />
+              Expérience Professionnelle
             </motion.h2>
-            <motion.p className="section-subtitle" variants={itemVariants}>
+            <p className="section-subtitle">
               <EncryptedText text="Mon parcours dans le développement logiciel" maxDuration={1800} />
-            </motion.p>
+            </p>
 
             <motion.div className="experience-card" variants={itemVariants}>
               <div className="experience-header">
-                <h3 className="experience-company"><EncryptedText text="BEYN (ex : AeBS)" /></h3>
-                <span className="experience-period"><EncryptedText text="Mai 2024 - Présent" /></span>
+                <h3 className="experience-company">BEYN (ex : AeBS)</h3>
+                <span className="experience-period">Mai 2024 - Présent</span>
               </div>
-              <p className="experience-role"><EncryptedText text="Full-stack Developer" /></p>
+              <p className="experience-role">Full-stack Developer</p>
               <div className="experience-desc text-gray-700 leading-relaxed">
                 <p style={{ marginBottom: '1.5rem' }}>
-                  <EncryptedText text="Développement de solutions numériques pour la transformation digitale des institutions financières :" maxDuration={2000} />
+                  Développement de solutions numériques pour la transformation digitale des institutions financières :
                 </p>
                 <ul className="list-disc list-inside space-y-4">
                   <li>Participation active à la conception, au développement et à l’optimisation d’applications web modernes pour les services bancaires numériques.</li>
@@ -1432,11 +1438,11 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
             variants={containerVariants}
           >
             <motion.h2 className="section-title" variants={itemVariants}>
-              <EncryptedText text="Restons en Contact" />
+              Restons en Contact
             </motion.h2>
-            <motion.p className="section-subtitle" variants={itemVariants}>
+            <p className="section-subtitle">
               <EncryptedText text="N'hésitez pas à me contacter pour vos projets" maxDuration={1800} />
-            </motion.p>
+            </p>
 
             <div className="contact-grid">
               <motion.div className="contact-card" variants={itemVariants}>
@@ -1445,8 +1451,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <p className="contact-label"><EncryptedText text="Email" /></p>
-                <p className="contact-value"><EncryptedText text="amirbelaifa2001@gmail.com" /></p>
+                <p className="contact-label">Email</p>
+                <p className="contact-value">amirbelaifa2001@gmail.com</p>
               </motion.div>
 
               <motion.div className="contact-card" variants={itemVariants}>
@@ -1455,8 +1461,8 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
-                <p className="contact-label"><EncryptedText text="Téléphone" /></p>
-                <p className="contact-value"><EncryptedText text="0792 76 70 87" /></p>
+                <p className="contact-label">Téléphone</p>
+                <p className="contact-value">0792 76 70 87</p>
               </motion.div>
 
               <motion.div className="contact-card" variants={itemVariants}>
@@ -1466,15 +1472,15 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <p className="contact-label"><EncryptedText text="Localisation" /></p>
-                <p className="contact-value"><EncryptedText text="Boudouaou, Boumerdès" /></p>
+                <p className="contact-label">Localisation</p>
+                <p className="contact-value">Boudouaou, Boumerdès</p>
               </motion.div>
             </div>
           </motion.div>
         </div>
 
         <div className="footer">
-          <p><EncryptedText text="© 2024 BELAIFA Amir. Tous droits réservés." /></p>
+          <p>© 2024 BELAIFA Amir. Tous droits réservés.</p>
         </div>
       </section>
     </div>
