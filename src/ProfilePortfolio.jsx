@@ -7,6 +7,7 @@ import { TextGenerateEffect } from './components/ui/text-generate-effect';
 import { Meteors } from './components/ui/meteors';
 import { CardSpotlight } from './components/ui/card-spotlight';
 import { EncryptedText } from './components/ui/encrypted-text';
+import { TracingBeam } from './components/ui/tracing-beam';
 
 const styles = `
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
@@ -1071,6 +1072,7 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
   };
 
   return (
+    <TracingBeam>
     <div className="portfolio-wrapper">
       {/* ====== HERO SECTION ====== */}
       <section className="hero-section-new">
@@ -1213,7 +1215,6 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
         >
-          <span>Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
@@ -1326,56 +1327,56 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
                     whileHover={{ y: -10 }}
                     style={{ height: '100%' }}
                   >
-                  <div className="project-image-wrapper">
-                    <img
-                      src={project.img}
-                      alt={project.title}
-                      className="project-image"
-                      loading="lazy"
-                    />
-                    {project.status === 'in-progress' && (
-                      <div className="project-status-badge">
-                        <span className="status-dot"></span>
-                        En cours
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="project-content">
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-desc">{project.desc}</p>
-
-                    {project.progress !== undefined && (
-                      <div className="progress-bar-container">
-                        <div className="progress-label">
-                          <span>Progression</span>
-                          <span>{project.progress}%</span>
+                    <div className="project-image-wrapper">
+                      <img
+                        src={project.img}
+                        alt={project.title}
+                        className="project-image"
+                        loading="lazy"
+                      />
+                      {project.status === 'in-progress' && (
+                        <div className="project-status-badge">
+                          <span className="status-dot"></span>
+                          En cours
                         </div>
-                        <div className="progress-bar">
-                          <motion.div
-                            className="progress-fill"
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${project.progress}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, ease: 'easeOut' }}
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="project-tech">
-                      {project.tech.map(t => (
-                        <span key={t} className="tech-tag">{t}</span>
-                      ))}
+                      )}
                     </div>
 
-                    {/* <a href="#" className="project-link">
+                    <div className="project-content">
+                      <h3 className="project-title">{project.title}</h3>
+                      <p className="project-desc">{project.desc}</p>
+
+                      {project.progress !== undefined && (
+                        <div className="progress-bar-container">
+                          <div className="progress-label">
+                            <span>Progression</span>
+                            <span>{project.progress}%</span>
+                          </div>
+                          <div className="progress-bar">
+                            <motion.div
+                              className="progress-fill"
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${project.progress}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, ease: 'easeOut' }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="project-tech">
+                        {project.tech.map(t => (
+                          <span key={t} className="tech-tag">{t}</span>
+                        ))}
+                      </div>
+
+                      {/* <a href="#" className="project-link">
                                             Voir le projet
                                             <svg className="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                 <path d="M5 12h14M12 5l7 7-7 7" />
                                             </svg>
                                         </a> */}
-                  </div>
+                    </div>
                   </motion.div>
                 </CardSpotlight>
               ))}
@@ -1484,6 +1485,7 @@ const ProfilePortfolio = ({ projects, inProgress }) => {
         </div>
       </section>
     </div>
+    </TracingBeam>
   );
 };
 

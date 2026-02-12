@@ -5,7 +5,11 @@
       "Bash(npx react-scripts build:*)",
       "WebFetch(domain:ui.aceternity.com)",
       "WebSearch",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:aceternity.sveltekit.io)",
+      "WebFetch(domain:www.aceternity.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx shadcn@latest add @aceternity/tracing-beam)"
     ]
   }
 }
