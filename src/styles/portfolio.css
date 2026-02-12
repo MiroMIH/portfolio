@@ -838,56 +838,161 @@ body {
   }
 }
 
+/* ===== EXPERIENCE SECTION - Git Log Terminal ===== */
+
 .experience-section {
   padding: 8rem 2rem;
   background: #0f0f1e;
+  position: relative;
+  overflow: hidden;
 }
 
-.experience-card {
+.exp-card {
   max-width: 900px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.5rem;
-  padding: 3rem;
 }
 
-.experience-header {
+/* Git log header */
+.exp-git-header {
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  position: relative;
+  z-index: 2;
+}
+
+.exp-git-line {
   display: flex;
-  justify-content: space-between;
-  align-items: start;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.experience-company {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
-}
-
-.experience-period {
-  padding: 0.6rem 1.5rem;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.experience-role {
-  font-size: 1.3rem;
-  color: #a855f7;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.experience-desc {
-  color: #8a8a9e;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
   line-height: 1.8;
-  font-size: 1.05rem;
+}
+
+.exp-git-keyword {
+  color: #818cf8;
+  font-weight: 600;
+}
+
+.exp-git-hash {
+  color: #febc2e;
+  font-weight: 600;
+}
+
+.exp-git-head {
+  color: #28c840;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.exp-git-value {
+  color: #6b6b80;
+}
+
+/* Commit message — role + intro */
+.exp-commit-msg {
+  padding: 1rem 1.25rem 0.5rem 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.exp-role {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+.exp-company-note {
+  font-size: 0.72rem;
+  color: #555;
+  font-family: 'JetBrains Mono', monospace;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.exp-intro {
+  font-size: 0.82rem;
+  color: #6b6b80;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsibilities list */
+.exp-responsibilities {
+  padding: 0.25rem 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+  z-index: 2;
+}
+
+.exp-resp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.exp-resp-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.exp-resp-check {
+  color: #28c840;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.exp-resp-text {
+  font-size: 0.78rem;
+  color: #8a8a9e;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.exp-resp-item:hover .exp-resp-text {
+  color: #b0b0c0;
+}
+
+/* Tech stack row */
+.exp-tech-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.exp-tech-label {
+  font-size: 0.72rem;
+  color: #555;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.exp-tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .exp-commit-msg {
+    padding-left: 1.25rem;
+  }
 }
 
 .contact-section {
@@ -971,8 +1076,8 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .experience-card {
-    padding: 2rem;
+  .exp-card .skill-card-inner {
+    padding: 0;
   }
 }
 
