@@ -1,0 +1,26 @@
+const techLogos = {
+  'Angular': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/angular/angular-original.svg',
+  'React': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg',
+  'NextJS': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-line.svg',
+  'HTML': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg',
+  'CSS': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg',
+  'JavaScript': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg',
+  'TypeScript': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
+  'TailwindCSS': 'https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg',
+  'Spring Boot': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg',
+  'Django': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/django/django-plain.svg',
+  'Java': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg',
+  'NodeJS': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg',
+  'ExpressJS': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg',
+  'MongoDB': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg',
+  'MySQL': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg',
+  'PostgreSQL': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg',
+  'D3': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/d3js/d3js-original.svg',
+  'AI': 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+  'Flutter': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg',
+  'PHP': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg',
+  'Python': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg',
+  'VSCode': 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg',
+};
+
+export default techLogos;
