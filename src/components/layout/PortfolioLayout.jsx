@@ -10,7 +10,7 @@ import '../../styles/portfolio.css';
 
 const PortfolioLayout = () => {
   return (
-    <TracingBeam>
+    <>
       <EasterEgg />
       <div className="portfolio-wrapper">
         <HeroSection />
@@ -19,7 +19,7 @@ const PortfolioLayout = () => {
         <ExperienceSection />
         <ContactSection />
       </div>
-    </TracingBeam>
+    </>
   );
 };
 
