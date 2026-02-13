@@ -1801,6 +1801,57 @@ body {
   }
 }
 
+/* ===== ACTIVITY SECTION ===== */
+
+.activity-section {
+  padding: 6rem 2rem 4rem;
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.activity-img-wrapper {
+  padding: 1rem 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  filter: brightness(0.95) contrast(1.05);
+  transition: filter 0.3s ease;
+}
+
+.activity-card:hover .activity-img {
+  filter: brightness(1) contrast(1.1);
+}
+
+@media (max-width: 900px) {
+  .activity-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-section {
+    padding: 4rem 0.75rem 3rem;
+  }
+}
+
 /* ===== BOOT SEQUENCE ===== */
 
 .boot-overlay {

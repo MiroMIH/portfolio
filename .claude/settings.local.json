@@ -9,7 +9,12 @@
       "WebFetch(domain:aceternity.sveltekit.io)",
       "WebFetch(domain:www.aceternity.com)",
       "WebFetch(domain:github.com)",
-      "Bash(npx shadcn@latest add @aceternity/tracing-beam)"
+      "Bash(npx shadcn@latest add @aceternity/tracing-beam)",
+      "WebFetch(domain:leetcode-stats-api.herokuapp.com)",
+      "WebFetch(domain:github-readme-stats.vercel.app)",
+      "WebFetch(domain:github-readme-streak-stats.herokuapp.com)",
+      "WebFetch(domain:github-profile-summary-cards.vercel.app)",
+      "WebFetch(domain:leetcode-stats.vercel.app)"
     ]
   }
 }

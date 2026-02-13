@@ -5,6 +5,7 @@ import SkillsSection from '../sections/SkillsSection';
 import ProjectsSection from '../sections/ProjectsSection';
 import ExperienceSection from '../sections/ExperienceSection';
 import ContactSection from '../sections/ContactSection';
+import ActivitySection from '../sections/ActivitySection';
 import EasterEgg from '../ui/easter-egg';
 import '../../styles/portfolio.css';
 
@@ -18,6 +19,7 @@ const PortfolioLayout = () => {
         <ProjectsSection />
         <ExperienceSection />
         <ContactSection />
+        <ActivitySection />
       </div>
     </>
   );
