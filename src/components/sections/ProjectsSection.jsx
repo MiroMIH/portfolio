@@ -74,7 +74,7 @@ const ProjectCard = ({ project, index }) => {
               <span className="terminal-dot" style={{ background: '#febc2e' }} />
               <span className="terminal-dot" style={{ background: '#28c840' }} />
             </div>
-            <span className="terminal-filename">{project.id}/README.md</span>
+            <span className="terminal-filename">{`com.amir.projects.${project.id}`}</span>
           </div>
 
           {/* Project header — thumbnail + info */}

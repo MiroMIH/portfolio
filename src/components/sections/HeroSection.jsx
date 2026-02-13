@@ -10,13 +10,13 @@ import { hero } from '../../data/hero';
 const HACKER_CHARSET = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`01';
 
 const BOOT_LINES = [
-  { text: '> BIOS v4.2.1 — System integrity check', color: '#444' },
-  { text: '> CPU: OK  |  RAM: OK  |  GPU: OK', color: '#28c840' },
-  { text: '> Loading kernel modules...', color: '#444' },
-  { text: '> Mounting encrypted filesystem...', color: '#444' },
-  { text: '> Establishing secure connection...', color: '#818cf8' },
-  { text: '> Decrypting portfolio data...', color: '#a855f7' },
-  { text: '> Injecting dependencies: react, framer-motion, gsap', color: '#444' },
+  { text: '> Loading JVM... Heap: 512MB allocated', color: '#444' },
+  { text: '> java.version: 21.0.2 LTS — vendor: Oracle', color: '#555' },
+  { text: '> Compiling Portfolio.java...', color: '#818cf8' },
+  { text: '> BUILD SUCCESS — 0 errors, 0 warnings', color: '#28c840' },
+  { text: '> @Autowired dependencies injected', color: '#a855f7' },
+  { text: '> Establishing secure connection...', color: '#444' },
+  { text: '> new Portfolio().run()', color: '#818cf8' },
   { text: '> ACCESS GRANTED', color: '#28c840', highlight: true },
 ];
 
@@ -200,6 +200,16 @@ const HeroSection = () => {
 
       {/* Hero Content */}
       <div className="hero-content-new">
+        {/* @Singleton annotation */}
+        <motion.div
+          className="hero-singleton"
+          initial={{ opacity: 0 }}
+          animate={bootDone ? { opacity: 1 } : {}}
+          transition={{ delay: 0.05, duration: 0.6 }}
+        >
+          @Singleton
+        </motion.div>
+
         {/* {AB} Logo with spinning gradient border */}
         <motion.div
           className="hero-avatar-wrapper"
@@ -342,6 +352,16 @@ const HeroSection = () => {
           </motion.a>
         </motion.div>
 
+        {/* // FIXME comment */}
+        <motion.span
+          className="code-comment"
+          initial={{ opacity: 0 }}
+          animate={bootDone ? { opacity: 1 } : {}}
+          transition={{ delay: 1.2 }}
+        >
+          {'// FIXME: need more coffee'}
+        </motion.span>
+
         {/* Secondary links */}
         <motion.div
           className="hero-secondary-links"
@@ -354,6 +374,11 @@ const HeroSection = () => {
           <span>{hero.location}</span>
         </motion.div>
       </div>
+
+      {/* // TODO comment */}
+      <span className="code-comment code-comment-abs code-comment-br">
+        {'// TODO: scroll down'}
+      </span>
 
       {/* Scroll indicator */}
       <motion.div

@@ -110,29 +110,32 @@ const Footer = () => {
         </div>
       </motion.div>
 
-      {/* Bottom bar */}
+      {/* Bottom bar — JVM status */}
       <div className="footer-bottom">
         <div className="footer-bottom-inner">
           <div className="footer-status">
             <span className="footer-status-dot" />
-            <span>ONLINE</span>
+            <span>JVM: RUNNING</span>
           </div>
 
           <p className="footer-copyright">
             &copy; {new Date().getFullYear()} BELAIFA Amir — Tous droits réservés
           </p>
 
-          <motion.button
-            className="footer-top-btn"
-            onClick={scrollToTop}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="footer-top-cmd">cd ~</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 19V5M5 12l7-7 7 7" />
-            </svg>
-          </motion.button>
+          <div className="footer-right-group">
+            <span className="footer-java-ver">Java 21 LTS</span>
+            <motion.button
+              className="footer-top-btn"
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="footer-top-cmd">cd ~</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 19V5M5 12l7-7 7 7" />
+              </svg>
+            </motion.button>
+          </div>
         </div>
       </div>
     </footer>

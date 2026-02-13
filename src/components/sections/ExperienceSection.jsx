@@ -76,7 +76,7 @@ const ExperienceSection = () => {
                   <span className="terminal-dot" style={{ background: '#febc2e' }} />
                   <span className="terminal-dot" style={{ background: '#28c840' }} />
                 </div>
-                <span className="terminal-filename">career.log</span>
+                <span className="terminal-filename">com.amir.career.Logger</span>
               </div>
 
               {/* Git log header */}

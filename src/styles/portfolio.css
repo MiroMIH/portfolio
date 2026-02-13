@@ -1882,6 +1882,219 @@ body {
   text-align: right;
 }
 
+/* ===== EASTER EGGS ===== */
+
+/* SOP Toast */
+.ee-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10000;
+  width: 400px;
+  max-width: calc(100vw - 2rem);
+  background: #0c0c0c;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 0 60px rgba(99, 102, 241, 0.12),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.ee-toast-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ee-toast-title {
+  font-size: 0.62rem;
+  color: #444;
+}
+
+.ee-toast-body {
+  padding: 1rem;
+}
+
+.ee-sop-line {
+  font-size: 0.78rem;
+  margin-bottom: 0.6rem;
+}
+
+.ee-kw { color: #818cf8; font-weight: 700; }
+.ee-dot { color: #555; }
+.ee-prop { color: #38bdf8; }
+.ee-method { color: #34d399; }
+.ee-paren { color: #666; }
+.ee-string { color: #28c840; }
+.ee-semi { color: #555; }
+
+.ee-output {
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  padding: 0.45rem 0.65rem;
+  background: rgba(40, 200, 64, 0.05);
+  border: 1px solid rgba(40, 200, 64, 0.1);
+  border-radius: 5px;
+  margin-bottom: 0.75rem;
+}
+
+.ee-output-prompt {
+  color: #28c840;
+  font-weight: 700;
+}
+
+.ee-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 0.75rem;
+}
+
+.ee-stack {
+  margin-bottom: 0.75rem;
+}
+
+.ee-stack-header {
+  font-size: 0.72rem;
+  color: #a855f7;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.ee-stack-trace {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ee-stack-trace span {
+  font-size: 0.58rem;
+  color: #3a3a4e;
+}
+
+.ee-hint {
+  font-size: 0.62rem;
+  color: #555;
+  font-style: italic;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* NullPointerException popup */
+.ee-npe {
+  position: fixed;
+  z-index: 10000;
+  transform: translate(-50%, calc(-100% - 12px));
+  padding: 0.65rem 1rem;
+  background: rgba(15, 5, 5, 0.95);
+  border: 1px solid rgba(255, 87, 87, 0.3);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(255, 87, 87, 0.1);
+  max-width: 380px;
+}
+
+.ee-npe-exception {
+  font-size: 0.72rem;
+  color: #ff5f57;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.ee-npe-trace {
+  font-size: 0.58rem;
+  color: #666;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.ee-npe-hint {
+  font-size: 0.58rem;
+  color: #444;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+/* @Singleton badge */
+.hero-singleton {
+  font-size: 0.7rem;
+  color: #818cf8;
+  opacity: 0.35;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+/* // Code comments (decorative) */
+.code-comment {
+  font-size: 0.6rem;
+  color: #1e1e30;
+  font-family: 'JetBrains Mono', monospace;
+  font-style: italic;
+  pointer-events: none;
+  user-select: none;
+  display: block;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.code-comment-abs {
+  position: absolute;
+  z-index: 5;
+}
+
+.code-comment-br {
+  bottom: 5rem;
+  right: 3rem;
+  text-align: right;
+}
+
+/* Footer JVM extras */
+.footer-right-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-java-ver {
+  font-size: 0.6rem;
+  color: #333;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+  .ee-toast {
+    bottom: 1rem;
+    right: 1rem;
+    width: calc(100vw - 2rem);
+  }
+
+  .code-comment-br {
+    display: none;
+  }
+
+  .footer-java-ver {
+    display: none;
+  }
+
+  .footer-right-group {
+    gap: 0;
+  }
+}
+
 /* ===== HERO SCANLINE & HUD ===== */
 
 .hero-scanline {

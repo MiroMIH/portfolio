@@ -9,21 +9,21 @@ const HACKER_CHARSET = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`01アイウエオ';
 
 const categoryMeta = {
   'Frontend': {
-    filename: 'frontend.config.ts',
+    filename: 'com.amir.skills.Frontend',
     command: 'scan --modules @frontend/core',
     accentColor: '#818cf8',
     gradient: 'linear-gradient(135deg, #6366f1, #a855f7)',
     glow: 'rgba(99, 102, 241, 0.12)',
   },
   'Backend': {
-    filename: 'server.config.ts',
+    filename: 'com.amir.skills.Backend',
     command: 'scan --modules @backend/api',
     accentColor: '#38bdf8',
     gradient: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
     glow: 'rgba(59, 130, 246, 0.12)',
   },
   'Bases de données': {
-    filename: 'database.config.ts',
+    filename: 'com.amir.skills.Database',
     command: 'scan --modules @database/drivers',
     accentColor: '#34d399',
     gradient: 'linear-gradient(135deg, #10b981, #06b6d4)',

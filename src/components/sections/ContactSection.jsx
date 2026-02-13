@@ -140,7 +140,7 @@ const ContactSection = () => {
                 <span className="terminal-dot" style={{ background: '#febc2e' }} />
                 <span className="terminal-dot" style={{ background: '#28c840' }} />
               </div>
-              <span className="terminal-filename">network.scan</span>
+              <span className="terminal-filename">com.amir.net.Scanner</span>
             </div>
 
             {/* Scan command */}
@@ -295,7 +295,7 @@ const ContactSection = () => {
                 <span className="terminal-dot" style={{ background: '#febc2e' }} />
                 <span className="terminal-dot" style={{ background: '#28c840' }} />
               </div>
-              <span className="terminal-filename">compose.msg</span>
+              <span className="terminal-filename">com.amir.net.Compose</span>
             </div>
 
             {/* Compose command */}
