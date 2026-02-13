@@ -1,6 +1,40 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// ─── Achievement Registry ───
+const ACHIEVEMENTS = [
+  { id: 'java', name: 'Hello World', rarity: 'Common', hint: '// Every dev\'s first word...', icon: '☕' },
+  { id: 'dblclick', name: 'NullPointer', rarity: 'Common', hint: '// Click the void', icon: '💥' },
+  { id: 'konami', name: 'Cheat Code', rarity: 'Legendary', hint: '// ↑↑↓↓... you know the rest', icon: '🎮' },
+  { id: 'sudo', name: 'Root Access', rarity: 'Rare', hint: '// With great power...', icon: '🔑' },
+  { id: 'gitblame', name: 'Blame Game', rarity: 'Rare', hint: '// Who wrote this code?', icon: '🕵️' },
+  { id: 'idle', name: 'Sleepy Thread', rarity: 'Rare', hint: '// Do nothing. Literally.', icon: '😴' },
+  { id: 'contextmenu', name: 'Right Click', rarity: 'Common', hint: '// Not your usual menu', icon: '📋' },
+  { id: 'instanceof', name: 'Type Checker', rarity: 'Epic', hint: '// Click the name. A lot.', icon: '🔍' },
+  { id: 'shake', name: 'Phone Shaker', rarity: 'Epic', hint: '// Mobile only. Shake it.', icon: '📱' },
+  { id: 'api', name: 'Secret API', rarity: 'Legendary', hint: '// Navigate to a hidden path', icon: '🌐' },
+  { id: 'greeting', name: 'Polyglot', rarity: 'Common', hint: '// Say hello in another language', icon: '🌍' },
+  { id: 'clicks10', name: 'Curious Clicker', rarity: 'Common', hint: '// Click around... 10 should do', icon: '👆' },
+  { id: 'clicks50', name: 'Dedicated Explorer', rarity: 'Rare', hint: '// Keep clicking...', icon: '🖱️' },
+  { id: 'clicks100', name: 'Click Overflow', rarity: 'Epic', hint: '// Persistence is key', icon: '🏋️' },
+  { id: '404', name: 'File Not Found', rarity: 'Common', hint: '// Type a familiar error code', icon: '🚫' },
+  { id: 'escape', name: 'Escape Artist', rarity: 'Rare', hint: '// Try to leave. Three times.', icon: '🏃' },
+  { id: 'selection', name: 'Substring', rarity: 'Common', hint: '// Highlight some text', icon: '✂️' },
+  { id: 'resize', name: 'Dimension Shift', rarity: 'Common', hint: '// Resize the viewport', icon: '📐' },
+  { id: 'gc', name: 'Garbage Collector', rarity: 'Legendary', hint: '// Patience is a virtue (5 min)', icon: '♻️' },
+  { id: 'rmrf', name: 'Dangerous Command', rarity: 'Epic', hint: '// Type the forbidden command', icon: '💀' },
+  { id: 'eof', name: 'End of File', rarity: 'Rare', hint: '// Scroll to the very end', icon: '📜' },
+  { id: 'matrix', name: 'Red Pill', rarity: 'Legendary', hint: '// Click the avatar. Many times.', icon: '💊' },
+  { id: 'console', name: 'DevTools', rarity: 'Common', hint: '// Open the console (auto-unlocked)', icon: '🛠️' },
+];
+
+const RARITY_COLORS = {
+  Common: '#9ca3af',
+  Rare: '#38bdf8',
+  Epic: '#a855f7',
+  Legendary: '#f59e0b',
+};
+
 // Konami code sequence
 const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
@@ -56,6 +90,34 @@ const EasterEgg = () => {
   const [showEOF, setShowEOF] = useState(false);
   const [showMatrix, setShowMatrix] = useState(false);
 
+  // Achievement Hub
+  const [showHub, setShowHub] = useState(false);
+  const [hubPulse, setHubPulse] = useState(false);
+  const [unlocked, setUnlocked] = useState(() => {
+    try {
+      const saved = localStorage.getItem('ee-achievements');
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch { return new Set(); }
+  });
+
+  const unlock = useCallback((id) => {
+    setUnlocked(prev => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      try { localStorage.setItem('ee-achievements', JSON.stringify([...next])); } catch {}
+      return next;
+    });
+    setHubPulse(true);
+    setTimeout(() => setHubPulse(false), 1500);
+  }, []);
+
+  // Auto-unlock console achievement on first hub open
+  const handleOpenHub = useCallback(() => {
+    setShowHub(true);
+    unlock('console');
+  }, [unlock]);
+
   // Refs
   const typedRef = useRef('');
   const konamiRef = useRef([]);
@@ -90,6 +152,7 @@ const EasterEgg = () => {
           konamiRef.current = [];
           setShowKonami(true);
           autoDismiss(setShowKonami, 8000);
+          unlock('konami');
         }
       } else {
         konamiRef.current = e.key === KONAMI[0] ? [e.key] : [];
@@ -104,6 +167,7 @@ const EasterEgg = () => {
           escCountRef.current = 0;
           setShowEscape(true);
           autoDismiss(setShowEscape, 4000);
+          unlock('escape');
         }
         return;
       }
@@ -120,6 +184,7 @@ const EasterEgg = () => {
         typedRef.current = '';
         setShowToast(true);
         autoDismiss(setShowToast, 7000);
+        unlock('java');
         return;
       }
 
@@ -128,6 +193,7 @@ const EasterEgg = () => {
         typedRef.current = '';
         setShowSudo(true);
         autoDismiss(setShowSudo, 8000);
+        unlock('sudo');
         return;
       }
 
@@ -136,6 +202,7 @@ const EasterEgg = () => {
         typedRef.current = '';
         setShowGitBlame(true);
         autoDismiss(setShowGitBlame, 8000);
+        unlock('gitblame');
         return;
       }
 
@@ -144,6 +211,7 @@ const EasterEgg = () => {
         typedRef.current = '';
         setShow404(true);
         autoDismiss(setShow404, 5000);
+        unlock('404');
         return;
       }
 
@@ -152,6 +220,7 @@ const EasterEgg = () => {
         typedRef.current = '';
         setShowRmRf(true);
         setTimeout(() => setShowRmRf(false), 3000);
+        unlock('rmrf');
         return;
       }
 
@@ -162,6 +231,7 @@ const EasterEgg = () => {
           setGreetingData(data);
           setShowGreeting(true);
           autoDismiss(setShowGreeting, 6000);
+          unlock('greeting');
           return;
         }
       }
@@ -169,7 +239,7 @@ const EasterEgg = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Double-click: NullPointerException ───
   useEffect(() => {
@@ -181,11 +251,12 @@ const EasterEgg = () => {
       setNpePos({ x: e.clientX, y: e.clientY });
       setShowNPE(true);
       autoDismiss(setShowNPE, 3500);
+      unlock('dblclick');
     };
 
     window.addEventListener('dblclick', handleDblClick);
     return () => window.removeEventListener('dblclick', handleDblClick);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Idle timer: Thread.sleep() ───
   useEffect(() => {
@@ -196,6 +267,7 @@ const EasterEgg = () => {
       clearTimeout(idleTimerRef.current);
       idleTimerRef.current = setTimeout(() => {
         setShowIdle(true);
+        unlock('idle');
       }, 60000);
     };
 
@@ -207,7 +279,7 @@ const EasterEgg = () => {
       events.forEach(ev => window.removeEventListener(ev, resetIdle));
       clearTimeout(idleTimerRef.current);
     };
-  }, [showIdle]);
+  }, [showIdle, unlock]);
 
   // ─── Right-click: Custom context menu ───
   useEffect(() => {
@@ -216,6 +288,7 @@ const EasterEgg = () => {
       e.preventDefault();
       setContextPos({ x: e.clientX, y: e.clientY });
       setShowContextMenu(true);
+      unlock('contextmenu');
     };
 
     const handleClickAway = () => {
@@ -228,7 +301,7 @@ const EasterEgg = () => {
       window.removeEventListener('contextmenu', handleContext);
       window.removeEventListener('click', handleClickAway);
     };
-  }, [showContextMenu]);
+  }, [showContextMenu, unlock]);
 
   // ─── Triple-click on hero name: instanceof ───
   useEffect(() => {
@@ -247,12 +320,13 @@ const EasterEgg = () => {
         clickCount = 0;
         setShowInstanceOf(true);
         autoDismiss(setShowInstanceOf, 5000);
+        unlock('instanceof');
       }
     };
 
     window.addEventListener('click', handleClick);
     return () => window.removeEventListener('click', handleClick);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Device shake: ConcurrentModificationException (mobile) ───
   useEffect(() => {
@@ -278,6 +352,7 @@ const EasterEgg = () => {
           shakeCount = 0;
           setShowShake(true);
           autoDismiss(setShowShake, 4000);
+          unlock('shake');
         }
       }
 
@@ -288,18 +363,20 @@ const EasterEgg = () => {
 
     window.addEventListener('devicemotion', handleMotion);
     return () => window.removeEventListener('devicemotion', handleMotion);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Secret #/api hash route ───
   useEffect(() => {
     const checkHash = () => {
-      setShowApi(window.location.hash === '#/api');
+      const isApi = window.location.hash === '#/api';
+      setShowApi(isApi);
+      if (isApi) unlock('api');
     };
 
     checkHash();
     window.addEventListener('hashchange', checkHash);
     return () => window.removeEventListener('hashchange', checkHash);
-  }, []);
+  }, [unlock]);
 
   // ─── Global click counter: achievement milestones ───
   useEffect(() => {
@@ -311,20 +388,23 @@ const EasterEgg = () => {
         setAchievementText('ClickEvent \u00d7 10 \u2014 Curious Clicker');
         setShowAchievement(true);
         autoDismiss(setShowAchievement, 5000);
+        unlock('clicks10');
       } else if (count === 50) {
         setAchievementText('ClickEvent \u00d7 50 \u2014 Dedicated Explorer');
         setShowAchievement(true);
         autoDismiss(setShowAchievement, 5000);
+        unlock('clicks50');
       } else if (count === 100) {
         setAchievementText('ClickEvent \u00d7 100 \u2014 Click Overflow Master');
         setShowAchievement(true);
         autoDismiss(setShowAchievement, 5000);
+        unlock('clicks100');
       }
     };
 
     window.addEventListener('click', handleClick);
     return () => window.removeEventListener('click', handleClick);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Text selection: String.substring() tooltip ───
   useEffect(() => {
@@ -335,18 +415,20 @@ const EasterEgg = () => {
         setSelectionText(text.length > 30 ? text.slice(0, 30) + '...' : text);
         setShowSelection(true);
         autoDismiss(setShowSelection, 3000);
+        unlock('selection');
       }
     };
 
     document.addEventListener('mouseup', handleSelection);
     return () => document.removeEventListener('mouseup', handleSelection);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Window resize: Dimension display ───
   useEffect(() => {
     const handleResize = () => {
       setResizeDims({ w: window.innerWidth, h: window.innerHeight });
       setShowResize(true);
+      unlock('resize');
       clearTimeout(resizeTimerRef.current);
       resizeTimerRef.current = setTimeout(() => setShowResize(false), 2000);
     };
@@ -356,7 +438,7 @@ const EasterEgg = () => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimerRef.current);
     };
-  }, []);
+  }, [unlock]);
 
   // ─── 5 min on page: GarbageCollector ───
   useEffect(() => {
@@ -365,11 +447,12 @@ const EasterEgg = () => {
         gcShownRef.current = true;
         setShowGC(true);
         autoDismiss(setShowGC, 5000);
+        unlock('gc');
       }
     }, 300000); // 5 minutes
 
     return () => clearTimeout(timer);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Scroll to bottom: EOF ───
   useEffect(() => {
@@ -381,12 +464,13 @@ const EasterEgg = () => {
         eofShownRef.current = true;
         setShowEOF(true);
         autoDismiss(setShowEOF, 5000);
+        unlock('eof');
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [autoDismiss]);
+  }, [autoDismiss, unlock]);
 
   // ─── Avatar/logo 5-click: Matrix rain ───
   useEffect(() => {
@@ -402,12 +486,13 @@ const EasterEgg = () => {
         avatarClickRef.current = 0;
         setShowMatrix(true);
         setTimeout(() => setShowMatrix(false), 3000);
+        unlock('matrix');
       }
     };
 
     window.addEventListener('click', handleClick);
     return () => window.removeEventListener('click', handleClick);
-  }, []);
+  }, [unlock]);
 
   // ─── Matrix canvas animation ───
   useEffect(() => {
@@ -1140,6 +1225,109 @@ const EasterEgg = () => {
               <span className="ee-paren">()</span>
               <span className="ee-semi">;</span>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ─── Achievement Hub Button ─── */}
+      <motion.button
+        className={`ee-hub-btn${hubPulse ? ' ee-hub-pulse' : ''}`}
+        onClick={handleOpenHub}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        title="Achievement Hub"
+      >
+        <span className="ee-hub-btn-text">
+          {'{'}&#9749; {unlocked.size}/{ACHIEVEMENTS.length}{'}'}
+        </span>
+      </motion.button>
+
+      {/* ─── Achievement Hub Panel ─── */}
+      <AnimatePresence>
+        {showHub && (
+          <motion.div
+            className="ee-hub-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setShowHub(false)}
+          >
+            <motion.div
+              className="ee-hub-panel"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 40, scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Title bar */}
+              <div className="ee-hub-titlebar">
+                <div className="terminal-dots">
+                  <span className="terminal-dot" style={{ background: '#ff5f57' }} />
+                  <span className="terminal-dot" style={{ background: '#febc2e' }} />
+                  <span className="terminal-dot" style={{ background: '#28c840' }} />
+                </div>
+                <span className="ee-hub-titlebar-text">achievements.jar &mdash; runtime inspector</span>
+                <button className="ee-hub-close" onClick={() => setShowHub(false)}>&times;</button>
+              </div>
+
+              {/* Header */}
+              <div className="ee-hub-header">
+                <span className="ee-annotation">@AchievementRegistry</span>
+                <span className="ee-hub-count">{unlocked.size} / {ACHIEVEMENTS.length} unlocked</span>
+              </div>
+
+              {/* Progress bar */}
+              <div className="ee-hub-progress-wrap">
+                <div className="ee-hub-progress-bar">
+                  <motion.div
+                    className="ee-hub-progress-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${(unlocked.size / ACHIEVEMENTS.length) * 100}%` }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                  />
+                </div>
+                <span className="ee-hub-progress-pct">
+                  {Math.round((unlocked.size / ACHIEVEMENTS.length) * 100)}%
+                </span>
+              </div>
+
+              {/* Achievement grid */}
+              <div className="ee-hub-grid">
+                {ACHIEVEMENTS.map((a) => {
+                  const isUnlocked = unlocked.has(a.id);
+                  return (
+                    <div
+                      key={a.id}
+                      className={`ee-hub-card${isUnlocked ? ' ee-hub-card-unlocked' : ' ee-hub-card-locked'}`}
+                    >
+                      <div className="ee-hub-card-icon">
+                        {isUnlocked ? a.icon : '\u{1F512}'}
+                      </div>
+                      <div className="ee-hub-card-info">
+                        <div className="ee-hub-card-top">
+                          <span className="ee-hub-card-name">
+                            {isUnlocked ? a.name : '\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588'}
+                          </span>
+                          <span
+                            className="ee-hub-rarity"
+                            style={{ color: RARITY_COLORS[a.rarity] }}
+                          >
+                            {a.rarity}
+                          </span>
+                        </div>
+                        {isUnlocked ? (
+                          <span className="ee-hub-card-status">{'\u2713'} UNLOCKED</span>
+                        ) : (
+                          <span className="ee-hub-card-hint">{a.hint}</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
