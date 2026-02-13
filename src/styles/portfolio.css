@@ -724,6 +724,37 @@ body {
   overflow: hidden;
 }
 
+/* Redacted description for professional projects */
+.proj-desc-redacted {
+  position: relative;
+  overflow: hidden;
+}
+
+.proj-desc-redacted p {
+  filter: blur(4px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.proj-redacted-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.proj-redacted-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #dc2626;
+  opacity: 0.85;
+}
+
 /* Tech dependencies */
 .proj-deps {
   display: flex;

@@ -115,8 +115,13 @@ const ProjectCard = ({ project, index }) => {
           </div>
 
           {/* Description */}
-          <div className="proj-desc-block">
+          <div className={`proj-desc-block${project.category === 'Professionnel' ? ' proj-desc-redacted' : ''}`}>
             <p>{project.desc}</p>
+            {project.category === 'Professionnel' && (
+              <div className="proj-redacted-overlay">
+                <span className="proj-redacted-label">REDACTED</span>
+              </div>
+            )}
           </div>
 
           {/* Tech dependencies */}
