@@ -19,7 +19,7 @@ const PortfolioLayout = () => {
         <ProjectsSection />
         <ExperienceSection />
         <ContactSection />
-        <ActivitySection />
+        {/* <ActivitySection /> */}
       </div>
     </>
   );

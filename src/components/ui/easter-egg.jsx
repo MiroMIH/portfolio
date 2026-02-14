@@ -26,6 +26,10 @@ const ACHIEVEMENTS = [
   { id: 'eof', name: 'End of File', rarity: 'Rare', hint: '// Scroll to the very end', icon: '📜' },
   { id: 'matrix', name: 'Red Pill', rarity: 'Legendary', hint: '// Click the avatar. Many times.', icon: '💊' },
   { id: 'console', name: 'DevTools', rarity: 'Common', hint: '// Open the console (auto-unlocked)', icon: '🛠️' },
+  { id: 'inspector', name: 'Code Inspector', rarity: 'Rare', hint: '// Review 3 different projects', icon: '🔎' },
+  { id: 'imageglitch', name: 'ImageMagick', rarity: 'Epic', hint: '// Click a project image... a lot', icon: '🖼️' },
+  { id: 'forcekill', name: 'SIGKILL', rarity: 'Epic', hint: '// The red dot hides a secret', icon: '☠️' },
+  { id: 'stackoverflow', name: 'Stack Overflow', rarity: 'Rare', hint: '// Open and close too fast', icon: '♾️' },
 ];
 
 const RARITY_COLORS = {
@@ -138,6 +142,24 @@ const EasterEgg = () => {
   const autoDismiss = useCallback((setter, ms) => {
     setTimeout(() => setter(false), ms);
   }, []);
+
+  // ─── Listen for project modal easter egg events ───
+  useEffect(() => {
+    const handler = (e) => {
+      const id = e.detail;
+      if (id && !unlocked.has(id)) {
+        unlock(id);
+        const ach = ACHIEVEMENTS.find((a) => a.id === id);
+        if (ach) {
+          setAchievementText(`${ach.icon} ${ach.name}`);
+          setShowAchievement(true);
+          autoDismiss(setShowAchievement, 3500);
+        }
+      }
+    };
+    window.addEventListener('ee-unlock', handler);
+    return () => window.removeEventListener('ee-unlock', handler);
+  }, [unlock, unlocked, autoDismiss]);
 
   // ─── Keyboard listener (java, sudo, git blame, konami, greetings, 404, rm -rf) ───
   useEffect(() => {
