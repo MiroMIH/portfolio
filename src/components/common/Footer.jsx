@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { IconTerminal2 } from '@tabler/icons-react';
 import { socialLinks } from '../../data/contact';
 
-const Footer = () => {
+const Footer = ({ onOpenTerminal }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -124,6 +125,16 @@ const Footer = () => {
 
           <div className="footer-right-group">
             <span className="footer-java-ver">Java 21 LTS</span>
+            <motion.button
+              className="footer-top-btn"
+              onClick={onOpenTerminal}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              title="Open Terminal"
+              style={{ marginRight: '8px', opacity: 0.6 }}
+            >
+              <IconTerminal2 size={20} />
+            </motion.button>
             <motion.button
               className="footer-top-btn"
               onClick={scrollToTop}
