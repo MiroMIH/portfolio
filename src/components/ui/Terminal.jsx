@@ -1,8 +1,79 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { hero } from '../../data/hero';
 import { projects } from '../../data/projects';
 import { socialLinks } from '../../data/contact';
+
+// --- Easter Egg: Cowsay ---
+const cowsay = (text) => {
+  const bubble = [
+    `  ${'-'.repeat(text.length + 2)}`,
+    `< ${text} >`,
+    `  ${'-'.repeat(text.length + 2)}`,
+  ];
+  const cow = [
+    '        \\   ^__^',
+    '         \\  (oo)\\_______',
+    '            (__)\\       )\\/\\',
+    '                ||----w |',
+    '                ||     ||',
+  ];
+  return <pre className="text-sm leading-tight">{[...bubble, ...cow].join('\n')}</pre>;
+};
+
+// --- Easter Egg: Matrix Effect ---
+const MatrixEffect = ({ onComplete }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+
+    const rainDrops = Array.from({ length: columns }).map(() => 1);
+
+    const render = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#0F0';
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
+        }
+        rainDrops[i]++;
+      }
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+    const timer = setTimeout(onComplete, 5000);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      clearTimeout(timer);
+    };
+  }, [onComplete]);
+
+  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full z-50" />;
+};
+
 
 const Terminal = ({ isVisible, onClose }) => {
   const [input, setInput] = useState('');
@@ -11,6 +82,7 @@ const Terminal = ({ isVisible, onClose }) => {
   ]);
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isMatrixActive, setMatrixActive] = useState(false);
   const inputRef = useRef(null);
   const bodyRef = useRef(null);
 
@@ -22,8 +94,8 @@ const Terminal = ({ isVisible, onClose }) => {
     const newHistory = [...history, { type: 'command', text: `> ${command}` }];
     let output = { type: 'error', text: `command not found: ${command}` };
 
-    const args = command.toLowerCase().split(' ');
-    const cmd = args[0];
+    const args = command.split(' ');
+    const cmd = args[0].toLowerCase();
 
     switch (cmd) {
       case 'help':
@@ -35,6 +107,8 @@ const Terminal = ({ isVisible, onClose }) => {
               <br />- <strong>whoami</strong>: Displays a short bio.
               <br />- <strong>socials</strong>: Lists social media links.
               <br />- <strong>projects</strong>: Shows available projects.
+              <br />- <strong>cowsay [message]</strong>: An ASCII cow says something.
+              <br />- <strong>matrix</strong>: Enter the matrix.
               <br />- <strong>clear</strong>: Clears the terminal history.
               <br />- <strong>exit</strong>: Closes the terminal.
             </span>
@@ -74,6 +148,20 @@ const Terminal = ({ isVisible, onClose }) => {
             </span>
           ),
         };
+        break;
+      
+      case 'cowsay':
+        const message = args.slice(1).join(' ') || '...moo';
+        output = { type: 'info', text: cowsay(message) };
+        break;
+
+      case 'matrix':
+        setMatrixActive(true);
+        setHistory([]);
+        return;
+
+      case 'sudo':
+        output = { type: 'error', text: 'User is not in the sudoers file. This incident will be reported.' };
         break;
 
       case 'clear':
@@ -136,6 +224,10 @@ const Terminal = ({ isVisible, onClose }) => {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
   }, [history]);
+
+  if (isMatrixActive) {
+    return <MatrixEffect onComplete={() => setMatrixActive(false)} />;
+  }
 
   return (
     <AnimatePresence>
