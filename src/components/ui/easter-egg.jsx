@@ -30,6 +30,8 @@ const ACHIEVEMENTS = [
   { id: 'imageglitch', name: 'ImageMagick', rarity: 'Epic', hint: '// Click a project image... a lot', icon: '🖼️' },
   { id: 'forcekill', name: 'SIGKILL', rarity: 'Epic', hint: '// The red dot hides a secret', icon: '☠️' },
   { id: 'stackoverflow', name: 'Stack Overflow', rarity: 'Rare', hint: '// Open and close too fast', icon: '♾️' },
+  { id: 'boom', name: 'Big Bang', rarity: 'Epic', hint: '// Type something explosive...', icon: '💣' },
+  { id: 'glitch', name: 'VHS Mode', rarity: 'Rare', hint: '// Tape corrupted. Rewind and try.', icon: '📼' },
 ];
 
 const RARITY_COLORS = {

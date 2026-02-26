@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import SectionHeader from '../common/SectionHeader';
-import Footer from '../common/Footer';
 import { EncryptedText } from '../ui/encrypted-text';
 import { contactInfo, socialLinks } from '../../data/contact';
 
@@ -438,7 +437,6 @@ const ContactSection = () => {
         </div>
       </div>
 
-      <Footer />
     </section>
   );
 };
